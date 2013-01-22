@@ -1,6 +1,6 @@
 # lru-memoize
 
-Memoize Node.JS functions with an LRU cache
+Speed up Node.JS functions with memoization, even when asynchronous
 
 ## Usage
 
