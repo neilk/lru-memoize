@@ -44,14 +44,27 @@ for details.
 var reallyFast = memoize(reallySlow, { maxAge: 1000 * 60 * 60 });
 ```
 
-There is one additional parameter not specified by node-lru-cache, which allows for results to be passed to a callback instead.
+There is one additional parameter not specified by node-lru-cache, which allows for results to be passed to a callback instead. This is useful if your 
+slow function does IO, and thus becomes asynchronous. The convention of using the callback as the last argument is assumed.
 
 ```javascript
+function reallySlow(foo, bar, next) {
+  /* do something that takes a long time with foo and bar */
+  next(results);
+}
+
 function cb(results) {
   console.log(results);
 }
 
-var reallyFastCb = memoize(reallySlow, { next: cb });
+reallySlow(10, 20, cb);
+
+var reallyFastCb = memoize(reallySlow, { next: true });
+
+reallyFast(10, 20, cb); // faster!
+
+// The last argument isn't part of the memoization, so you can alter it
+reallyFast(10, 20, someOtherCb); // still fast!
 ```
 
 ### Caveats
