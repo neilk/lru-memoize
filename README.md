@@ -28,8 +28,8 @@ Use this when:
 - You can afford to burn more memory storing results
 - You don't mind the cache lifetime being tied to node's lifetime
 
-Note that the LRU cache is right in the node process, and thus does not need to be serialized, and can even share objects. This can make it much faster or
-more convenient than using an external cache server like [memcached][2]
+Note that the LRU cache is right in the node process, and thus complex data structures do not need to be serialized, and can even share objects. This can make it much faster or
+more convenient than using an external cache server like [memcached][2].
 
 ### Options
 
