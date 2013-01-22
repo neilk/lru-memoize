@@ -1,0 +1,28 @@
+{
+  "name": "lru-memoize",
+  "description": "Memoize Node.JS functions with an LRU cache",
+  "version": "0.0.1",
+  "author": {
+    "name": "Neil Kandalgaonkar",
+    "email": "neilk@neilk.net",
+    "url": "http://neilk.net/"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "http://github.com/neilk/lru-memoize/raw/master/LICENSE"
+  },
+  "main": "lib/lru-memoize.js",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/neilk/lru-memoize.git"
+  },
+  "devDependencies": {
+    "tap": ""
+  },
+  "scripts": {
+    "test": "tap ./test"
+  },
+  "dependencies": {
+    "lru-cache": "*"
+  }
+}
