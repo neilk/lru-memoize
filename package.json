@@ -1,7 +1,7 @@
 {
   "name": "lru-memoize",
   "description": "Memoize Node.JS functions with an LRU cache",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": {
     "name": "Neil Kandalgaonkar",
     "email": "neilk@neilk.net",
