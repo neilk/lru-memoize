@@ -10,8 +10,9 @@ differently.
 Use this when:
 - You have a function you want to speed up
 - It is called repeatedly during its lifetime with the same parameters
-- You can afford to burn more memory storing results
 - The function is *pure*; that is, the results depend entirely on the arguments, and not information looked up elsewhere like a database, the current time, etc.
+- You can afford to burn more memory storing results
+- You don't mind the cache lifetime being tied to node's lifetime
 
 ```javascript
 var memoize = require('lru-memoize');
