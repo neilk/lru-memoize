@@ -28,6 +28,9 @@ Use this when:
 - You can afford to burn more memory storing results
 - You don't mind the cache lifetime being tied to node's lifetime
 
+Note that the LRU cache is right in the node process, and thus does not need to be serialized, and can even share objects. This can make it much faster or
+more convenient than using an external cache server like [memcached][2]
+
 ### Options
 
 You can set options for how the underlying LRU cache should work, with a second parameter. See the documentation for [node-lru-cache][1]
@@ -56,3 +59,4 @@ The function arguments should be cleanly stringifiable.
 Functions which use arguments that contain the control character '\001' may have surprising results.
 
 [1]: https://github.com/isaacs/node-lru-cache/
+[2]: http://memcached.org/
