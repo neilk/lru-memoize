@@ -24,12 +24,16 @@ reallyFast(10, 20);  // faster!
 Use this when:
 - You have a function you want to speed up
 - It is called repeatedly during its lifetime with the same parameters
+- These identical calls tend to happen around the same time
 - The function is *pure*; that is, the results depend entirely on the arguments, and not information looked up elsewhere like a database, the current time, etc.
 - You can afford to burn more memory storing results
-- You don't mind the cache lifetime being tied to node's lifetime
+- You don't need the cache to persist between runs of Node.js
 
-Note that the LRU cache is right in the node process, and thus complex data structures do not need to be serialized, and can even share objects. This can make it much faster or
+Note that the cache is right in the node process, and thus complex data structures do not need to be serialized, and can even share objects. This can make it much faster or
 more convenient than using an external cache server like [memcached][2].
+
+The underlying cache is a least-recently-used (LRU) cache. The cache tries to use a constant amount of memory, and when necessary throws away old results that 
+haven't been requested in a while.
 
 ### Options
 
