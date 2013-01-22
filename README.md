@@ -25,7 +25,7 @@ Use this when:
 - You have a function you want to speed up
 - It is called repeatedly during its lifetime with the same parameters
 - These identical calls tend to happen around the same time
-- The function is *pure*; that is, the results depend entirely on the arguments, and not information looked up elsewhere like a database, the current time, etc.
+- The function is more or less *pure*; that is, the results depend entirely on the arguments. (You can fudge this if you accept slightly out of date results; see below for cache options)
 - You can afford to burn more memory storing results
 - You don't need the cache to persist between runs of Node.js
 
