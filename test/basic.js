@@ -15,11 +15,10 @@ test("basic", function(t) {
 
 test("with async callback", function(t) {
   function countLines(filename, next) {
-    var i;
     var count = 0;
     fs.createReadStream(filename)
       .on('data', function(chunk) {
-        for (i=0; i < chunk.length; ++i) {
+        for (var i=0; i < chunk.length; ++i) {
           if (chunk[i] == 10) {
             count++;
           }
