@@ -44,14 +44,16 @@ for details.
 var reallyFast = memoize(reallySlow, { maxAge: 1000 * 60 * 60 });
 ```
 
+### Asynchronous functions
+
 There is one additional parameter not specified by node-lru-cache, which allows for results to be passed to a callback instead. This is useful if your 
 slow function does IO, and thus becomes asynchronous. The convention of using the callback as the last argument is assumed.
 
 ```javascript
-function countLines(filename, next) {
+function countLines(filename, extension, next) {
   var i;
   var count = 0;
-  fs.createReadStream(filename)
+  fs.createReadStream(filename + '.' + extension)
     .on('data', function(chunk) {
       for (i=0; i < chunk.length; ++i) {
         if (chunk[i] == 10) {
@@ -68,16 +70,15 @@ function cb(results) {
   console.log(results);
 }
 
-countLines('myfile.txt', cb);
+countLines('myfile', 'txt', cb);
 
 memoized_countLines = memoize(countLines, { next: true });
 
-memoized_countLines('myfile.txt', cb);
-memoized_countLines('myfile.txt', cb); // faster!
+memoized_countLines('myfile', 'txt', cb);
+memoized_countLines('myfile', 'txt', cb); // faster!
 
 // The last argument isn't part of the memoization, so you can alter it
-memoized_countLines('myfile.txt', someOtherCb);
-
+memoized_countLines('myfile', 'txt', someOtherCb); // still fast!
 ```
 
 ### Caveats
