@@ -48,23 +48,36 @@ There is one additional parameter not specified by node-lru-cache, which allows 
 slow function does IO, and thus becomes asynchronous. The convention of using the callback as the last argument is assumed.
 
 ```javascript
-function reallySlow(foo, bar, next) {
-  /* do something that takes a long time with foo and bar */
-  next(results);
+function countLines(filename, next) {
+  var i;
+  var count = 0;
+  fs.createReadStream(filename)
+    .on('data', function(chunk) {
+      for (i=0; i < chunk.length; ++i) {
+        if (chunk[i] == 10) {
+          count++;
+        }
+      }
+    })
+    .on('end', function() {
+      next(count);
+    });
 }
 
 function cb(results) {
   console.log(results);
 }
 
-reallySlow(10, 20, cb);
+countLines('myfile.txt', cb);
 
-var reallyFastCb = memoize(reallySlow, { next: true });
+memoized_countLines = memoize(countLines, { next: true });
 
-reallyFast(10, 20, cb); // faster!
+memoized_countLines('myfile.txt', cb);
+memoized_countLines('myfile.txt', cb); // faster!
 
 // The last argument isn't part of the memoization, so you can alter it
-reallyFast(10, 20, someOtherCb); // still fast!
+memoized_countLines('myfile.txt', someOtherCb);
+
 ```
 
 ### Caveats
