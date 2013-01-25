@@ -44,3 +44,17 @@ test("with async callback", function(t) {
   });
 
 });
+
+test("async multiple args", function(t) {
+  function doubleArgs(a, next) {
+    return next(a, a*2);
+  }
+  var m_doubleArgs = memoize(doubleArgs);
+
+  m_doubleArgs(10, function(orig, doub) {
+    t.equal(orig, 10);
+    t.equal(doub, 20);
+    t.end();
+  })
+});
+
