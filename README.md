@@ -88,5 +88,8 @@ The function arguments should be cleanly stringifiable.
 
 Functions which use arguments that contain the control character '\001' may have surprising results.
 
+If you return a data structure from the memoized function, and then modify that structure, you'll modify the
+cached value as well.
+
 [1]: https://github.com/isaacs/node-lru-cache/
 [2]: http://memcached.org/
